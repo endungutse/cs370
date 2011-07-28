@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1310084425152_1" label="workspace" name="workspace"/>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1310088171007_2" label="Homework" name="Homework"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1310084006784_0" label="Window Working Set" name="Aggregate for window 1310084006782"/>
+<mruList name="Homework"/>
+<mruList name="workspace"/>
+</workingSetManager>
