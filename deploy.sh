@@ -50,7 +50,7 @@ echo -n
   sleep 1
 done
 
-history=`curl http://ndemcassius.appspot.com/checkclearing`
+history=`curl http://cs370-ndemcassius.appspot.com/checkclearing`
 response=`curl -s -H Content-Type:application/json -d "$history" http://localhost:8085/checkclearing`
 
 echo $response | python -mjson.tool > /dev/null
