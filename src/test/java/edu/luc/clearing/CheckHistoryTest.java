@@ -16,13 +16,13 @@ import org.junit.Test;
 
 public class CheckHistoryTest {
 	private CheckHistory history;
-	private DataStoreAdapter mockDataStore1;
+	private DataStoreWriter mockDataStoreWriter;
 	
 	@Before
 		
 	public void setUp(){
-		mockDataStore = mock(DataStoreAdapter.class);
-		history = new CheckHistory(mockDataStore);
+		mockDataStoreWriter = mock(DataStoreWriter.class);
+		history = new CheckHistory(mockDataStoreWriter);
 	}
 		
 	@Test
@@ -31,11 +31,11 @@ public class CheckHistoryTest {
 		Map<String, Object> checks = new HashMap<String, Object>();
 		check.put("amount", "one");
 		List<Map<String, Object>> checks1 = asList(check);
-		when(mockDataStore.runQuery("Checks")).thenReturn(checks1 );
+		when(mockDataStoreWriter.runQuery("Checks")).thenReturn(checks1 );
 		
 		assertEquals("[\"one\")]", history.getAmounts());
 	}
-		   DataStoreAdapter mockDataStore = mock (DataStoreAdapter.class);
+		   DataStoreWriter mockDataStore = mock (DataStoreWriter.class);
 			Map<String, Object> check = new HashMap<String, Object>();
 
 }

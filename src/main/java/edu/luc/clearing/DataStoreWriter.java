@@ -10,6 +10,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Text;
+import com.google.appengine.api.datastore.PreparedQuery;
+
+import com.google.appengine.api.datastore.Query;
 
 public class DataStoreWriter {
 boolean isInTesting;
@@ -134,4 +137,3 @@ DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(checkList);
 }
 }
-

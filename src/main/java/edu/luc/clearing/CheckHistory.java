@@ -9,18 +9,21 @@ import com.google.gson.Gson;
 
 
 public class CheckHistory {
-	private DataStoreAdapter storeAdapter;
+	private DataStoreWriter storeWriter;
 	private Gson gson;
 	
-	public CheckHistory(DataStoreAdapter storeAdapter) {
-		this.storeAdapter = storeAdapter;
+	public CheckHistory(DataStoreWriter storeWriter) {
+		this.storeWriter = storeWriter;
 		gson = new Gson();
 	}
 
-	public String getAmounts() {
-		//Query q = new Query("Person");
+	public String getAmounts(String limitStr) {
+		Integer l= null;
+		if (limitStr !=null) {
+			l = Integer.parseInt(limitStr);
+		}
 		Set<String> amounts = new Hashset<String>();
-		List<Map<String, Object>> runQuery = storeAdapter.runQuery("Checks");
+		List<Map<String, Object>> runQuery = storeWriter.runQuery("Checks");
 		for(Map<String, Object> properties : runQuery) {
 			amounts.add(properties.get ("amount").toString());
 		}
