@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 public class JsonHandler {
 private static Gson gson = new Gson();
 
-public static List<String> jsonToMapParser(Reader jsonData) {
+public static List<String> jsonToStringListParser(Reader jsonData) {
      List<String> checks = gson.fromJson(jsonData, requestType());
      return checks;
 }
@@ -45,3 +45,4 @@ return mapOfChecks;
     }
 
 }
+    

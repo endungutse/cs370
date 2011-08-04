@@ -1,4 +1,5 @@
-package edu.luc.clearing;
+
+   package edu.luc.clearing;
 
 import java.io.BufferedReader;
 import java.io.CharArrayWriter;
@@ -74,3 +75,4 @@ assertThat(writer.toString(), is(equalTo("{}")));
 // }
 // }
 }
+

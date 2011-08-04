@@ -22,7 +22,7 @@ public class CheckHistory {
 		if (limitStr !=null) {
 			l = Integer.parseInt(limitStr);
 		}
-		Set<String> amounts = new Hashset<String>();
+		Set<String> amounts = new HashSet<String>();
 		List<Map<String, Object>> runQuery = storeWriter.runQuery("Checks");
 		for(Map<String, Object> properties : runQuery) {
 			amounts.add(properties.get ("amount").toString());

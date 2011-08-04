@@ -37,7 +37,7 @@ gradle gaeRun &
 server_pid=$!
 if [ "$?" -gt 0 ]; then
   #add count to while loop for optional timeout
-  echo "Server fialed to start"
+  echo "Server failed to start"
   exit 1
 fi
 
@@ -50,7 +50,7 @@ echo -n
   sleep 1
 done
 
-history=`curl http://ndemcassius.appspot.com/checkclearing`
+history=`curl http://cbetheridge-cs370.appspot.com/checkclearing`
 response=`curl -s -H Content-Type:application/json -d "$history" http://localhost:8085/checkclearing`
 
 echo $response | python -mjson.tool > /dev/null

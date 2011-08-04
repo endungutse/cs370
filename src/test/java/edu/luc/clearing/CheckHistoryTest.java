@@ -35,7 +35,7 @@ public class CheckHistoryTest {
 		
 		assertEquals("[\"one\")]", history.getAmounts());
 	}
-		   DataStoreWriter mockDataStore = mock (DataStoreWriter.class);
+		   DataStoreWriter mockDataStore = mock(DataStoreWriter.class);
 			Map<String, Object> check = new HashMap<String, Object>();
 
 }

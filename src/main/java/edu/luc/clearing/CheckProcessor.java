@@ -7,6 +7,7 @@ private static enum ADJECTIVES {
 cents (0), // 1 cents
 cent (0),
 cts (0),
+cnts (0),
 c (0),
 ¢ (0),
 and (2), // 'and' often means the break between dollars and cents, so tread as 'dollars'
@@ -19,11 +20,14 @@ hundred (4), // 10000 cents
 hundered (4),
 hunderd (4),
 hundrd (4),
-thousand (5), // 100000 cents
+thousand (5), // 100000 cents 1e5
 k (5),
-million (8), // 100000000 cents
+million (8), // 100000000 cents 1e8
 mille (8),
-m (8);
+m (8),
+billion (11), // 100000000000 cents 1e11
+b (11),
+trillion (14); // 100000000000000 cents 1e14
 
 private final Integer value;
 ADJECTIVES(Integer myValue){
@@ -119,7 +123,7 @@ return recurseProcessSentance(wordList, valueMultiplier);
 Long wordValue = null;
 Double decimalWordValue = StringToNumberParser.parse(word);
 if(decimalWordValue != null){
-wordValue = new Long((int)(decimalWordValue * (java.lang.Math.pow(10,valueMultiplier))));
+wordValue = new Double( decimalWordValue * (java.lang.Math.pow(10,valueMultiplier)) ).longValue();
 }
 
 //Recurse
@@ -154,4 +158,4 @@ return null;
 }
 }
 }
-
+  

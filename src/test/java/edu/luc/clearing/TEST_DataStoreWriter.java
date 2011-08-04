@@ -1,6 +1,5 @@
 package edu.luc.clearing;
 
-import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,11 +16,6 @@ testLogger.enableTestMode();
 @After
 public void tearDown() {
 testLogger = null;
-}
-
-@Test
-public void canSubmitCompleteRequest() {
-testLogger.writeRequestLog(new Date(), "immaRequest", "immaResponse");
 }
 
 @Test
@@ -56,3 +50,5 @@ public void stillSubmitsIfcalledPrematurely(){
 
 }
 
+
+  

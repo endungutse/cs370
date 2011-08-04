@@ -1,28 +1,19 @@
-package edu.luc.clearing;
 
-import java.io.Reader;
+    package edu.luc.clearing;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import com.google.appengine.api.datastore.DatastoreFailureException;
-
 
 //TODO Add internal check history
 public class RequestHandler {
 
-    public static String respond(Reader requestDataReader, DataStoreWriter logger){
-     Date requestDate = new Date();
-     //Parse the json to a list of check strings
-     List<String> listOfStrings = JsonHandler.jsonToMapParser(requestDataReader);
-     String requestJson = JsonHandler.stringListToJson(listOfStrings);
-    
-     List<Check> listOfChecks = stringListToCheckList(listOfStrings);
-    
-     //TODO Re-arrange so it doesn't rely on side effects
+    public static String respond(List<String> listOfCheckStrings, DataStoreWriter logger){
+     List<Check> listOfChecks = stringListToCheckList(listOfCheckStrings);
     
     Iterator<Check> checkListIterator = listOfChecks.iterator();
+   
+String unHandledChecksAggregator = "";
     
     while(checkListIterator.hasNext()){
     Check myCheck = checkListIterator.next();
@@ -32,15 +23,21 @@ public class RequestHandler {
     checkValue = CheckProcessor.processCheck(myCheck);
    
     if(checkValue == null){
-    System.err.println("!!!Unrecognizable Check: " + myCheck.getStringValue());
+    //The Check was unreadable
+    checkValue = new Long(-1);
     checkListIterator.remove();
+    unHandledChecksAggregator = unHandledChecksAggregator + ("!!!UnreadableCheck: " + myCheck.getStringValue() + "\n");
     }
     }catch(NumberFormatException e){
-    System.err.println("!!!NumberFormatException: " + myCheck.getStringValue() + "\n\t" + e.getMessage());
+    //The Check was unreadable
+    checkValue = new Long(-1);
     checkListIterator.remove();
-    }
-
+   
+    unHandledChecksAggregator = unHandledChecksAggregator + ("!!!NumberFormatException: " + e.getMessage() + " ; " + myCheck.getStringValue() + "\n");
+    }finally{
     myCheck.setNumberValue(checkValue);
+    logger.addCheck(myCheck);
+    }
     }
     
     String responseJson = "{}";
@@ -48,10 +45,13 @@ public class RequestHandler {
      responseJson = JsonHandler.checkListToJson(listOfChecks);
      }
     
-     try{
-     logger.writeRequestLog(requestDate, requestJson, responseJson);
-     }catch(DatastoreFailureException e){
-     System.err.println("!!!Could not write log to Data Store: " + requestJson + " : " + responseJson);
+     if( !(unHandledChecksAggregator.equals("")) ){
+     System.err.println("!!!Unhandled Checks: " + unHandledChecksAggregator);
+// try{
+// Mailer.mail("Unhandled Checks" + "\n\n\n" + unHandledChecksAggregator);
+// }catch(Exception e){
+// System.err.println("!!!Unhandled Checks: " + unHandledChecksAggregator);
+// }
      }
     
      return responseJson;
@@ -69,3 +69,4 @@ public class RequestHandler {
      return checkList;
     }
 }
+

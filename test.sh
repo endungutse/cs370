@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-server=${1-localhost:8085} #take the first parameter
+server=${1-localhost:8085} 
  
 curl -s -H Content-Type:application/json -d '["two million three hundred fourty six thousand + two dollars and 10/100"]' http://$server/checkclearing
 
